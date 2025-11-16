@@ -1,0 +1,1 @@
+Open index.html in your browser. This prototype stores data in localStorage. Admin credentials: Admin / ankit@gmail.com / 12345678

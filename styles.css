@@ -1,0 +1,531 @@
+/* -----------------------------------------
+   Global Styles
+----------------------------------------- */
+:root {
+  --bg: #f4f4f6;             /* main background */
+  --bg-2: #ffffff;           /* header & panels */
+  --card: #ffffff;           /* video and playlist cards */
+  --border: #e5e5e5;         /* subtle border */
+  --text: #1a1a1a;           /* main text */
+  --text-muted: #666666;     /* secondary text */
+  --accent: #2563eb;         /* soft blue accent */
+  --button: #2563eb;         /* button background */
+  --button-text: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* -----------------------------------------
+   Top Navigation Bar
+----------------------------------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.topbar nav a {
+  color: var(--muted);
+  margin-left: 12px;
+  text-decoration: none;
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+/* -----------------------------------------
+   Layout Containers
+----------------------------------------- */
+.container {
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  padding: 20px;
+}
+
+/* -----------------------------------------
+   Video Cards
+----------------------------------------- */
+.video-card {
+  display: flex;
+  flex-direction: column;   /* vertical, clean stacking */
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  backdrop-filter: blur(6px);
+  padding: 12px;
+  border-radius: 10px;
+  min-height: 240px;
+  box-sizing: border-box;
+}
+
+.video-thumb {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* -----------------------------------------
+   Action Buttons Under Video Cards
+----------------------------------------- */
+.video-actions {
+  display: flex;
+  flex-wrap: wrap;   /* important to avoid overflow */
+  gap: 8px;
+  margin-top: 0px;
+}
+
+button {
+  background: var(--btn-bg, #0ea5a4);
+  border: 1px solid rgba(0,0,0,0.06);
+  color: var(--btn-text, #ffffff);
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  cursor: pointer;
+  min-width: 75px;  /* keeps all buttons visually consistent */
+  white-space: nowrap;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .15s ease, background .15s ease;
+}
+.video-actions button {
+  margin-right: 8px;
+}
+button:hover {
+  transform: translateY(-2px);
+  background: #0b908d;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  opacity: 0.85;
+}
+button:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Danger (Delete) Button */
+button.danger,
+.video-card button[style*="background:#e11d48"]{
+  background: #ef4444 !important;
+  color: #fff !important;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(239,68,68,0.15);
+}
+button.danger:hover {
+  background: #dc2626 !important;
+  box-shadow: 0 4px 12px rgba(239,68,68,0.25);
+}
+
+/* Edit Thumbnail Button */
+button.edit-thumb,
+.video-card button[style*="background:#f59e0b"] {
+  background: #f59e0b !important;
+  color: #021024 !important;
+}
+
+/* -----------------------------------------
+   Modals
+----------------------------------------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* darker overlay for clarity */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow-y: auto; /* allow scroll if screen is small */
+  z-index: 9999;
+}
+
+.modal .modal-content {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;  /* bigger for video */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.modal.small .modal-content {
+  max-width: 420px;
+}
+#modalPlayer {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  max-height: 70vh;
+  object-fit: contain;
+}
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.modal .close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  z-index: 20000;  /* stays on top of video */
+  padding: 4px 10px;
+  line-height: 1;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.modal .close:hover {
+  background: rgba(255,255,255,1);
+  color: #111;
+}
+
+
+.modal .close:hover {
+  color: #333;
+}
+.hide {
+  display: none;
+}
+
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* -----------------------------------------
+   Comments Section
+----------------------------------------- */
+.comments {
+  margin-top: 8px;
+}
+
+/* -----------------------------------------
+   Statistics (Admin)
+----------------------------------------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.stat {
+  background: var(--card);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* -----------------------------------------
+   Auth Pages
+----------------------------------------- */
+.auth-page {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 18px;
+  border-radius: 12px;
+  max-width: 420px;
+  margin: 20px auto;
+}
+
+/* -----------------------------------------
+   Inputs
+----------------------------------------- */
+input,
+textarea,
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: white;
+  width: 100%;
+}
+
+small, .muted, .video-card small {
+  color: var(--text-muted);
+}
+
+body.admin-page .grid {
+  display: grid;
+  /* responsive columns: 3 on wide, 2 on medium, 1 on small */
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  grid-auto-rows: auto; /* row height follows content */
+  gap: 28px;
+  padding: 28px;
+  align-items: start;   /* each cell sizes to its content, prevents overlap */
+}
+
+/* 2 columns */
+@media (max-width: 1100px) {
+  body.admin-page .grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+/* 1 column */
+@media (max-width: 700px) {
+  body.admin-page .grid {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 18px;
+  }
+}
+
+/* card sizing — let content determine height (no fixed height) */
+body.admin-page .video-card {
+  min-height: 0;        /* important: let content determine height */
+  padding: 14px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* a slightly taller thumbnail in admin view for clarity */
+body.admin-page .video-thumb {
+  height: 170px;
+}
+
+/* actions stay wrapped inside the card */
+body.admin-page .video-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* slightly smaller buttons on admin to reduce chance of extra wrapping */
+body.admin-page button {
+  min-width: 64px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+}
+
+/* keep delete/edit button styling consistent */
+body.admin-page button.danger,
+body.admin-page .video-card button[style*="background:#e11d48"] {
+  min-width: 56px;
+  padding: 7px 10px;
+}
+
+body.admin-page button.edit-thumb,
+body.admin-page .video-card button[style*="background:#f59e0b"] {
+  min-width: 56px;
+  padding: 7px 10px;
+}
+
+/* fallback for very narrow screens: stack actions vertically */
+@media (max-width: 480px) {
+  body.admin-page .video-actions { flex-direction: column; gap: 8px; }
+}
+/* --- Search box styles --- */
+.search {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.search-inner{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background: var(--bg-2, #fff);
+  border: 1px solid var(--border, #e5e5e5);
+  padding: 8px 12px;
+  border-radius: 10px;
+  min-width: 320px;      /* wider search box */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.search-inner input{
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--text, #111);
+  background: transparent;
+  width: 100%;
+}
+
+.search-icon { color: var(--text-muted, #666); opacity: 0.9; }
+
+.search-btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 10px;
+  padding: 8px 14px;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(14,165,164,0.12);
+}
+
+/* small screens */
+@media (max-width: 700px) {
+  .search-inner { min-width: 150px; }
+}
+/* ---------- Improved Login Card Styles ---------- */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+.login-card {
+  width: 420px;
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e6e6e6);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 8px 30px rgba(36, 50, 75, 0.06);
+}
+
+.login-card h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.6rem;
+  color: var(--text, #111827);
+}
+
+/* Role radio row (user/admin) */
+.role-row {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* each role option: radio + label aligned */
+.role-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* style the native radio a bit (kept native for accessibility) */
+.role-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent, #2563eb); /* modern color on supported browsers */
+}
+
+/* field blocks */
+.field {
+  margin-bottom: 14px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: var(--text-muted, #6b7280);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: var(--bg-2, #fff);
+  font-size: 0.98rem;
+  color: var(--text, #111827);
+  box-shadow: none;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent, #2563eb);
+  box-shadow: 0 6px 18px rgba(37,99,235,0.08);
+}
+
+/* actions */
+.actions {
+  margin-top: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* primary button */
+.primary-btn {
+  background: var(--btn-bg, #0ea5a4);
+  color: var(--btn-text, #fff);
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(14,165,164,0.12);
+}
+
+.primary-btn:hover { transform: translateY(-2px); }
+
+/* muted link */
+.muted {
+  color: var(--text-muted, #6b7280);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* small responsive tweak */
+@media (max-width: 480px) {
+  .login-card { width: 100%; padding: 20px; border-radius: 10px; }
+  .role-row { gap: 12px; flex-wrap: wrap; }
+}

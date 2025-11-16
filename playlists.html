@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Playlists</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">VidVault</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html" id="authLink">Login</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Playlists</h2>
+    <section class="playlist-controls">
+      <button onclick="loadLikedPlaylist()">Liked Videos</button>
+      <input id="newPlaylistName" placeholder="New playlist name" />
+      <button onclick="createPlaylist()">Create Playlist</button>
+    </section>
+
+    <section id="playlistsArea" class="grid"></section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

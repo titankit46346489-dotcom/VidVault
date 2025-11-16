@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>VidVault</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">VidVault</div>
+    <form id="searchForm" class="search" onsubmit="searchSubmit(event)" role="search">
+  <div class="search-inner">
+    <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path fill="currentColor" d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"></path>
+    </svg>
+    <input id="searchInput" type="search" placeholder="Search videos..." aria-label="Search videos" autocomplete="off" />
+  </div>
+  <button type="submit" class="search-btn">Search</button>
+</form>
+
+    <nav>
+      <a href="playlists.html">Playlists</a>
+      <a href="login.html" id="authLink">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="controls">
+      <button onclick="openUploadModal()">Upload</button>
+      <button onclick="showAll()">All Videos</button>
+      <button onclick="filterMine()">My Uploads</button>
+    </section>
+
+    <section id="videosGrid" class="grid"></section>
+  </main>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal hide">
+    <span class="close" onclick="closeVideoModal()">&times;</span>
+    <div class="modal-content">
+      
+      <h3 id="modalTitle"></h3>
+      <video id="modalPlayer" controls width="720"></video>
+      <div class="video-actions">
+        <button id="likeBtn" onclick="toggleLike(currentVideoId)">👍 <span id="likeCount">0</span></button>
+        <button onclick="saveToLiked(currentVideoId)">Save to Liked</button>
+        <button onclick="openSavePlaylist(currentVideoId)">+ Playlist</button>
+        <button id="editThumbBtn" onclick="promptChangeThumbnail(currentVideoId)" style="display:none">Edit Thumbnail</button>
+      </div>
+      <div class="comments">
+        <h4>Comments</h4>
+        <div id="commentsList"></div>
+        <textarea id="commentText" placeholder="Write a comment..."></textarea>
+        <button onclick="postComment()">Post</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Modal (mock) -->
+  <div id="uploadModal" class="modal hide">
+    <div class="modal-content small">
+      <span class="close" onclick="closeUploadModal()">&times;</span>
+      <h3>Upload Video </h3>
+      <input id="uploadTitle" placeholder="Title" />
+      <input id="uploadUrl" placeholder="Video URL (mp4 or webm)" />
+      <!-- Thumbnail input -->
+      <input id="uploadThumb" placeholder="Thumbnail URL (optional)" />
+      <button onclick="mockUpload()">Upload</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
