@@ -1,9 +1,13 @@
 // Compact app.js with thumbnail edit support
 
 const SAMPLE_VIDEOS = [
-  {id: 'v1', title:'Intro to JavaScript', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'},
+  {id: 'v1', title:'Intro to JavaScript', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'https://imgs.search.brave.com/_vSqU8JWL5upWXxJx1_akLBibA5zhuc8T4L84uQC4V8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9qYXZhc2NyaXB0/LXByb2dyYW1taW5n/LWNvZGUtYWJzdHJh/Y3QtdGVjaG5vbG9n/eS1iYWNrZ3JvdW5k/XzI3MjMwNi0xNTUu/anBnP3NlbXQ9YWlz/X2h5YnJpZCZ3PTc0/MCZxPTgw', likes:0, comments:[], uploader:'Admin'},
   {id: 'v2', title:'CSS Grid Tutorial', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'},
-  {id: 'v3', title:'React Basics', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'}
+  {id: 'v3', title:'React Basics', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'},
+  {id: 'v3', title:'Intro to Algorithms', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'},
+  {id: 'v3', title:'Space Documentary', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'},
+  {id: 'v3', title:'Intro to Software Engineering', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'},
+  {id: 'v3', title:'DSA in C++', url:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumbnail:'', likes:0, comments:[], uploader:'Admin'}
 ];
 
 const ADMIN = {email:'ankit@gmail.com', password:'12345678', name:'Admin'};
